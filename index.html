@@ -865,8 +865,9 @@ function gliEngine(GLI) {
     if (ddx.length) for (const d of ddx) { const li = document.createElement('li'); li.textContent = d; dl.appendChild(li); }
     else dl.innerHTML = '<li class="empty">No additional correlation for this combination.</li>';
 
-    let report = sentences.join(' ');
-    report += '\n\nImpression: ' + (pattern || 'incomplete spirometry') + (sev && pattern && !/Normal|Nonspecific|unconfirmed/.test(pattern) && sev.grade !== 'FEV1 preserved' ? ', ' + sev.grade : '') + (dlcoS.has ? (dlcoS.low ? '; ' + severityDLCO(dlco, prefer) + ' reduced diffusing capacity' : dlcoS.high ? '; increased diffusing capacity' : '; normal diffusing capacity') : '') + '. Interpreted per ATS/ERS 2022' + (prefer === 'z' ? ' using GLI z-scores' : ' using percent-predicted thresholds') + (REF.spiroSet ? ' (spirometry reference: ' + REF.spiroSet + ')' : '') + '; pre-bronchodilator values define the pattern.';
+    let report = '';
+    report += 'Impression: ' + (pattern || 'incomplete spirometry') + (sev && pattern && !/Normal|Nonspecific|unconfirmed/.test(pattern) && sev.grade !== 'FEV1 preserved' ? ', ' + sev.grade : '') + (dlcoS.has ? (dlcoS.low ? '; ' + severityDLCO(dlco, prefer) + ' reduced diffusing capacity' : dlcoS.high ? '; increased diffusing capacity' : '; normal diffusing capacity') : '') + '. Interpreted per ATS/ERS 2022' + (prefer === 'z' ? ' using GLI z-scores' : ' using percent-predicted thresholds') + (REF.spiroSet ? ' (spirometry reference: ' + REF.spiroSet + ')' : '') + '; pre-bronchodilator values define the pattern.';
+    report += '\n\n' + sentences.join(' ');
     rep.textContent = report;
   }
 
