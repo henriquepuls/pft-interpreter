@@ -69,7 +69,6 @@ button:hover { filter: brightness(1.05); }
 .refs p, .refs ol { font-size: 0.85rem; color: var(--muted); }
 .refs p { margin: 8px 0; }
 .panel { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 14px 16px; }
-.panel + .panel { margin-top: 14px; }
 .panel.full { margin-top: 14px; }
 .panel-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; margin-bottom: 10px; }
 .panel-head small { color: var(--muted); font-size: 0.78rem; }
@@ -539,7 +538,7 @@ function gliEngine(GLI) {
       g.appendChild(svgEl('rect', { x: n.x - w / 2, y: n.y - h / 2, width: w, height: h, rx: n.q ? h / 2 : 4 }));
       const t = svgEl('text', { x: n.x, y: n.y, 'text-anchor': 'middle' });
       setLines(n, t, n.lines);
-      g.appendChild(t); svg.appendChild(g); FLOW.nodes[n.id] = g; FLOW.texts[n.id] = t;
+      g.appendChild(t); svg.appendChild(g); FLOW.nodes[n.id] = g; FLOW.texts[n.id] = t; if (!FLOW.firstNode) FLOW.firstNode = g;
     }
   }
   function renderFlow(path, tracks) {
@@ -548,7 +547,7 @@ function gliEngine(GLI) {
       const id = n.id;
       const on = n.track ? tracks[id] != null : path.has(id);
       FLOW.nodes[id].classList.toggle('active', on);
-      if (FLOW.edges[id]) FLOW.edges[id].classList.toggle('active', on);
+      if (FLOW.edges[id]) { FLOW.edges[id].classList.toggle('active', on); if (on && FLOW.firstNode) FLOW.firstNode.parentNode.insertBefore(FLOW.edges[id], FLOW.firstNode); }
       if (FLOW.labels[id]) FLOW.labels[id].classList.toggle('active', on);
       if (n.track) {
         const v = tracks[id];
