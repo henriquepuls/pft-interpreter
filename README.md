@@ -1,6 +1,8 @@
 # PFT Interpreter
 
-Single-page interpreter for spirometry, bronchodilator response, lung volumes and diffusing capacity following the ATS/ERS 2022 interpretation standard (Stanojevic 2022). The page is `index.html`: inline CSS and JavaScript, no build step, no external scripts, no network access at run time. It is published as a private Claude artifact and is wrapped in a document skeleton at publish time, so the file carries no `html`, `head` or `body` tags.
+**Use it here: https://henriquepuls.github.io/pft-interpreter/**
+
+Single-page interpreter for spirometry, bronchodilator response, lung volumes and diffusing capacity following the ATS/ERS 2022 interpretation standard (Stanojevic 2022). The page is `index.html`: inline CSS and JavaScript, no build step, no external scripts, no network access at run time. It is hosted on GitHub Pages from the `main` branch and also published as a private Claude artifact; the file opens with a doctype and viewport meta so it renders on its own, and the artifact viewer wraps it in its own skeleton.
 
 ## Reference values (added 2026-10-18)
 
