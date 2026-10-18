@@ -107,3 +107,7 @@ Page-level checks run with node (script extracted from `index.html` and executed
 - Keep the page self-contained and under 16 MB (currently about 190 kB).
 - Check syntax after edits: extract the script between the `<script>` tags and run `node --check` on it.
 - Writing style for page text: plain sentences, no em dashes.
+
+## How this was made
+
+This tool was built with Claude Code using Anthropic's Claude Fable 5.1 model, under the direction of Henrique Puls, who specified the clinical logic, reviewed the output and is responsible for the content. Claude is not an author or contributor of this repository.
