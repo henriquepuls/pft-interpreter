@@ -110,4 +110,4 @@ Page-level checks run with node (script extracted from `index.html` and executed
 
 ## How this was made
 
-This tool was built with Claude Code using Anthropic's Claude Fable 5.1 model, under the direction of Henrique Puls, who specified the clinical logic, reviewed the output and is responsible for the content.
+This tool was built with Claude Code using Anthropic's Claude Fable 5.1 model, under the direction of Henrique Puls, who specified the clinical logic and reviewed the output.
