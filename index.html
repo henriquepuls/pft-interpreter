@@ -57,11 +57,20 @@ input:focus-visible, select:focus-visible, button:focus-visible { outline: 2px s
 button { font: inherit; cursor: pointer; border-radius: 4px; border: 1px solid var(--line); background: var(--surface); color: var(--fg); padding: 6px 12px; }
 button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
 button:hover { filter: brightness(1.05); }
-.grid { display: grid; grid-template-columns: minmax(0, 520px) minmax(0, 1fr); gap: 24px; align-items: start; }
-@media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+.inputgrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; align-items: start; }
+@media (max-width: 760px) { .inputgrid { grid-template-columns: 1fr; } }
+.outputs { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 14px; align-items: start; }
+@media (max-width: 900px) { .outputs { grid-template-columns: 1fr; } }
+.stack { display: grid; gap: 14px; min-width: 0; }
+.inputgrid > .panel, .outputs > .panel, .stack > .panel { margin-top: 0; min-width: 0; }
+.sectlabel { font-family: var(--font-head); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin: 24px 0 8px; }
+.refpanel:has(.refout:empty) { display: none; }
+.refs summary { font-size: 0.85rem; }
+.refs p, .refs ol { font-size: 0.85rem; color: var(--muted); }
+.refs p { margin: 8px 0; }
 .panel { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 14px 16px; }
 .panel + .panel { margin-top: 14px; }
-.panel.full { margin-top: 24px; }
+.panel.full { margin-top: 14px; }
 .panel-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; margin-bottom: 10px; }
 .panel-head small { color: var(--muted); font-size: 0.78rem; }
 table.inputs { width: 100%; border-collapse: collapse; }
@@ -115,6 +124,7 @@ figure.flow { margin: 8px 0 12px; }
 #arr path { fill: var(--line); }
 #arr-on path { fill: var(--accent); }
 figcaption { font-size: 0.8rem; color: var(--muted); margin-top: 4px; }
+figure.flow { margin: 4px 0 0; }
 .note { font-size: 0.8rem; color: var(--muted); margin: 10px 0 0; }
 .refout { margin-top: 10px; }
 .refout:empty { display: none; }
@@ -157,24 +167,16 @@ figcaption { font-size: 0.8rem; color: var(--muted); margin-top: 4px; }
   </div>
 </header>
 
-<div class="grid">
-<section aria-label="Inputs">
+<section class="inputgrid" aria-label="Inputs">
   <div class="panel">
-    <div class="panel-head"><h2>Reference method</h2><small>Enter whatever the lab printed; blanks are allowed</small></div>
+    <div class="panel-head"><h2>Patient and reference method</h2><small>demographics optional; blanks allowed</small></div>
     <div class="row2">
-      <div>
-        <label for="mode">Threshold basis</label>
-        <select id="mode">
-          <option value="z">z-scores first (ATS/ERS 2022, LLN = −1.645)</option>
-          <option value="pct">% predicted first (80 % / 0.70 fixed ratio, ATS/ERS 2005 grades)</option>
-        </select>
-      </div>
+      <div><label for="mode">Threshold basis</label><select id="mode">
+          <option value="z">z-scores (ATS/ERS 2022, LLN −1.645)</option>
+          <option value="pct">% predicted (80 %, fixed ratio 0.70, ATS/ERS 2005 grades)</option>
+        </select></div>
     </div>
-  </div>
-
-  <div class="panel">
-    <div class="panel-head"><h2>Demographics</h2><small>optional: computes GLI predicted values, LLN, % pred and z-scores</small></div>
-    <div class="row2">
+    <div class="row2" style="margin-top:8px">
       <div><label for="age">Age (years)</label><input type="number" step="0.1" min="3" max="95" id="age" placeholder="3 to 95"></div>
       <div>
         <label for="sex">Sex</label>
@@ -199,12 +201,10 @@ figcaption { font-size: 0.8rem; color: var(--muted); margin-top: 4px; }
         </select>
       </div>
     </div>
-    <div id="refout" class="refout"></div>
     <div class="refbar">
       <button type="button" id="recompute">Recompute z-scores and % pred</button>
-      <span class="note" style="margin:0">Computed values fill empty % pred and z-score fields as you type measured values. Fields you typed yourself are kept until you press Recompute.</span>
+      <span class="note" style="margin:0">Computed values fill empty % pred and z-score fields; fields you typed are kept until Recompute.</span>
     </div>
-    <p class="note" id="refnote">Equation sets: FEV<sub>1</sub>, FVC and FEV<sub>1</sub>/FVC from GLI Global 2022 (Bowerman 2023, race-neutral, the default per the 2023 ATS statement on race-neutral reference equations; the ancestry selector is ignored and disabled) or from GLI-2012 (Quanjer 2012, ancestry-specific), both 3 to 95 years; TLC, RV and RV/TLC from GLI-2021 static lung volumes (Hall 2021, European-ancestry data, 5 to 80 years); DLCO, VA and KCO from GLI-2017 TLCO (Stanojevic 2017 with the 2020 correction, 5 to 90 years, mL/min/mmHg). LLN and ULN are the 5th and 95th centiles (z = ±1.645).</p>
   </div>
 
   <div class="panel">
@@ -256,27 +256,31 @@ figcaption { font-size: 0.8rem; color: var(--muted); margin-top: 4px; }
   </div>
 </section>
 
-<section aria-label="Interpretation">
+<div class="sectlabel">Interpretation</div>
+<section class="outputs" aria-label="Interpretation">
   <div class="panel">
     <div class="headline" id="headline"></div>
     <ul class="findings" id="findings"></ul>
   </div>
-
-  <div class="panel">
-    <div class="panel-head"><h2>Physiologic correlation</h2><small>patterns to consider, not a diagnosis</small></div>
-    <ul class="ddx" id="ddx"></ul>
-  </div>
-
-  <div class="panel">
-    <div class="panel-head"><h2>Report text</h2><button type="button" id="copy" class="primary">Copy</button></div>
-    <pre class="report" id="report"></pre>
-    <p class="note">Pattern and severity are assigned from pre-bronchodilator values. z-score thresholds: LLN −1.645, ULN +1.645; severity for FEV<sub>1</sub> and DLCO: mild −1.65 to −2.5, moderate −2.51 to −4.0, severe below −4.0 (Stanojevic et al., Eur Respir J 2022). Percent-predicted fallback uses LLN 80 %, ULN 120 %, fixed ratio 0.70, and the ATS/ERS 2005 severity grades. Bronchodilator response: change in FEV<sub>1</sub> or FVC above 10 % of the predicted value (2022), with the legacy 12 % and 200 mL criterion shown for reference. When age, sex and height are entered, predicted values, LLN, % predicted and z-scores are computed from the GLI equations named in the Demographics panel; otherwise enter the lab's GLI output.</p>
+  <div class="stack">
+    <div class="panel">
+      <div class="panel-head"><h2>Report text</h2><button type="button" id="copy" class="primary">Copy</button></div>
+      <pre class="report" id="report"></pre>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><h2>Physiologic correlation</h2><small>patterns to consider, not a diagnosis</small></div>
+      <ul class="ddx" id="ddx"></ul>
+    </div>
   </div>
 </section>
-</div>
+
+<section class="panel full refpanel" aria-label="Reference values">
+  <div class="panel-head"><h2>Reference values</h2><small>computed from the GLI equations for the demographics entered</small></div>
+  <div id="refout" class="refout"></div>
+</section>
+
 <section class="panel full" aria-label="Algorithm">
-    <details open>
-      <summary>Algorithm used</summary>
+  <div class="panel-head"><h2>Algorithm path</h2><small>highlighted nodes are the route the current values took</small></div>
       <figure class="flow">
         <div class="flow-scroll">
           <svg id="flow" viewBox="0 0 940 500" role="img" aria-label="Decision tree of the ATS/ERS 2022 interpretation with the path taken by the current values highlighted">
@@ -288,6 +292,13 @@ figcaption { font-size: 0.8rem; color: var(--muted); margin-top: 4px; }
         </div>
         <figcaption>Highlighted nodes and arrows are the path the current interpretation took. Pills are decisions, boxes are outcomes; the bottom row shows the four assessments made alongside the pattern.</figcaption>
       </figure>
+</section>
+
+<section class="panel full refs" aria-label="References and method">
+  <details>
+    <summary>References, thresholds and method</summary>
+    <p class="note">Pattern and severity are assigned from pre-bronchodilator values. z-score thresholds: LLN −1.645, ULN +1.645; severity for FEV<sub>1</sub> and DLCO: mild −1.65 to −2.5, moderate −2.51 to −4.0, severe below −4.0 (Stanojevic et al., Eur Respir J 2022). Percent-predicted fallback uses LLN 80 %, ULN 120 %, fixed ratio 0.70, and the ATS/ERS 2005 severity grades. Bronchodilator response: change in FEV<sub>1</sub> or FVC above 10 % of the predicted value (2022), with the legacy 12 % and 200 mL criterion shown for reference. When age, sex and height are entered, predicted values, LLN, % predicted and z-scores are computed from the GLI equations named in the Demographics panel; otherwise enter the lab's GLI output.</p>
+    <p class="note" id="refnote">Equation sets: FEV<sub>1</sub>, FVC and FEV<sub>1</sub>/FVC from GLI Global 2022 (Bowerman 2023, race-neutral, the default per the 2023 ATS statement on race-neutral reference equations; the ancestry selector is ignored and disabled) or from GLI-2012 (Quanjer 2012, ancestry-specific), both 3 to 95 years; TLC, RV and RV/TLC from GLI-2021 static lung volumes (Hall 2021, European-ancestry data, 5 to 80 years); DLCO, VA and KCO from GLI-2017 TLCO (Stanojevic 2017 with the 2020 correction, 5 to 90 years, mL/min/mmHg). LLN and ULN are the 5th and 95th centiles (z = ±1.645).</p>
       <ol>
         <li>FEV<sub>1</sub>/FVC below LLN: airflow obstruction. If FVC is also low, TLC decides between a mixed defect (TLC low) and air trapping with pseudo-restriction (TLC normal). Low ratio with normal FEV<sub>1</sub> and FVC can be dysanapsis.</li>
         <li>Ratio normal and FVC low: TLC low means restriction, TLC normal means a nonspecific pattern. Without TLC the spirometry is a restrictive pattern or PRISm (preserved ratio, impaired spirometry), and TLC is required.</li>
@@ -298,7 +309,7 @@ figcaption { font-size: 0.8rem; color: var(--muted); margin-top: 4px; }
         <li>FEV<sub>1</sub> (mL) / PEF (L/min) above 10 raises the question of upper airway obstruction (Empey index).</li>
         <li>Reference values use the GLI LMS method: M = exp(a<sub>0</sub> + a<sub>1</sub>·ln(height) + a<sub>2</sub>·ln(age) + ancestry terms + Mspline), S = exp(p<sub>0</sub> + p<sub>1</sub>·ln(age) + ancestry terms + Sspline), L = q<sub>0</sub> + q<sub>1</sub>·ln(age) + Lspline, z = ((measured/M)<sup>L</sup> − 1)/(L·S), LLN = M·(1 − 1.645·L·S)<sup>1/L</sup>. Spline values are read from the published 0.25-year lookup tables with linear interpolation. GLI-2021 volumes use age and height on the scale given in Hall 2021 Table 3 (RV and RV/TLC use untransformed age and height). GLI-2017 predicted DLCO and KCO are adjusted for hemoglobin, carboxyhemoglobin above 2 % and test-site altitude when those are entered (ATS/ERS 2017 conventions, equations 31, 32, 34 and 37).</li>
       </ol>
-    </details>
+  </details>
 </section>
 </div>
 <div class="toast" id="toast">Copied</div>
