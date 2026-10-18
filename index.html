@@ -518,7 +518,7 @@ function gliEngine(GLI) {
       const path = svgEl('path', { d: d, class: 'fedge' });
       svg.appendChild(path); FLOW.edges[e[0]] = path;
       if (e[2]) {
-        const t = svgEl('text', { x: straight ? x2 + 8 : x2, y: straight ? ym + 14 : ym - 4, class: 'flabel', 'text-anchor': straight ? 'start' : 'middle' });
+        const t = svgEl('text', { x: x2 + 8, y: ym + 14, class: 'flabel', 'text-anchor': 'start' });
         t.textContent = e[2]; svg.appendChild(t); FLOW.labels[e[0]] = t;
       }
     }
