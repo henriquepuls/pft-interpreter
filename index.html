@@ -68,6 +68,9 @@ button:hover { filter: brightness(1.05); }
 .refs summary { font-size: 0.85rem; }
 .refs p, .refs ol { font-size: 0.85rem; color: var(--muted); }
 .refs p { margin: 8px 0; }
+.cites-head { margin: 14px 0 4px; font-size: 0.85rem; }
+.refs ol.cites { padding-left: 22px; }
+.refs ol.cites li { margin-bottom: 6px; overflow-wrap: anywhere; }
 .panel { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 14px 16px; }
 .panel.full { margin-top: 14px; }
 .panel-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; margin-bottom: 10px; }
@@ -308,6 +311,22 @@ figure.flow { margin: 4px 0 0; }
         <li>FEV<sub>1</sub> (mL) / PEF (L/min) above 10 raises the question of upper airway obstruction (Empey index).</li>
         <li>Reference values use the GLI LMS method: M = exp(a<sub>0</sub> + a<sub>1</sub>·ln(height) + a<sub>2</sub>·ln(age) + ancestry terms + Mspline), S = exp(p<sub>0</sub> + p<sub>1</sub>·ln(age) + ancestry terms + Sspline), L = q<sub>0</sub> + q<sub>1</sub>·ln(age) + Lspline, z = ((measured/M)<sup>L</sup> − 1)/(L·S), LLN = M·(1 − 1.645·L·S)<sup>1/L</sup>. Spline values are read from the published 0.25-year lookup tables with linear interpolation. GLI-2021 volumes use age and height on the scale given in Hall 2021 Table 3 (RV and RV/TLC use untransformed age and height). GLI-2017 predicted DLCO and KCO are adjusted for hemoglobin, carboxyhemoglobin above 2 % and test-site altitude when those are entered (ATS/ERS 2017 conventions, equations 31, 32, 34 and 37).</li>
       </ol>
+    <h3 class="cites-head">Citations</h3>
+    <ol class="cites">
+      <li>Stanojevic S, Kaminsky DA, Miller MR, Thompson B, Aliverti A, Barjaktarevic I, Cooper BG, Culver B, Derom E, Hall GL, Hallstrand TS, Leuppi JD, MacIntyre N, McCormack M, Rosenfeld M, Swenson ER. ERS/ATS technical standard on interpretive strategies for routine lung function tests. Eur Respir J. 2022 Jul 13;60(1):2101499. doi: 10.1183/13993003.01499-2021. Print 2022 Jul. PMID: 34949706.</li>
+      <li>Pellegrino R, Viegi G, Brusasco V, Crapo RO, Burgos F, Casaburi R, Coates A, van der Grinten CP, Gustafsson P, Hankinson J, Jensen R, Johnson DC, MacIntyre N, McKay R, Miller MR, Navajas D, Pedersen OF, Wanger J. Interpretative strategies for lung function tests. Eur Respir J. 2005 Nov;26(5):948-68. doi: 10.1183/09031936.05.00035205. PMID: 16264058.</li>
+      <li>Quanjer PH, Stanojevic S, Cole TJ, Baur X, Hall GL, Culver BH, Enright PL, Hankinson JL, Ip MS, Zheng J, Stocks J; ERS Global Lung Function Initiative. Multi-ethnic reference values for spirometry for the 3-95-yr age range: the global lung function 2012 equations. Eur Respir J. 2012 Dec;40(6):1324-43. doi: 10.1183/09031936.00080312. Epub 2012 Jun 27. PMID: 22743675; PMCID: PMC3786581.</li>
+      <li>Bowerman C, Bhakta NR, Brazzale D, Cooper BR, Cooper J, Gochicoa-Rangel L, Haynes J, Kaminsky DA, Lan LTT, Masekela R, McCormack MC, Steenbruggen I, Stanojevic S. A Race-neutral Approach to the Interpretation of Lung Function Measurements. Am J Respir Crit Care Med. 2023 Mar 15;207(6):768-774. doi: 10.1164/rccm.202205-0963OC. PMID: 36383197.</li>
+      <li>Bhakta NR, Bime C, Kaminsky DA, McCormack MC, Thakur N, Stanojevic S, Baugh AD, Braun L, Lovinsky-Desir S, Adamson R, Witonsky J, Wise RA, Levy SD, Brown R, Forno E, Cohen RT, Johnson M, Balmes J, Mageto Y, Lee CT, Masekela R, Weiner DJ, Irvin CG, Swenson ER, Rosenfeld M, Schwartzstein RM, Agrawal A, Neptune E, Wisnivesky JP, Ortega VE, Burney P. Race and Ethnicity in Pulmonary Function Test Interpretation: An Official American Thoracic Society Statement. Am J Respir Crit Care Med. 2023 Apr 15;207(8):978-995. doi: 10.1164/rccm.202302-0310ST. PMID: 36973004; PMCID: PMC10112445.</li>
+      <li>Hall GL, Filipow N, Ruppel G, Okitika T, Thompson B, Kirkby J, Steenbruggen I, Cooper BG, Stanojevic S; contributing GLI Network members. Official ERS technical standard: Global Lung Function Initiative reference values for static lung volumes in individuals of European ancestry. Eur Respir J. 2021 Mar 11;57(3):2000289. doi: 10.1183/13993003.00289-2020. Print 2021 Mar. PMID: 33707167.</li>
+      <li>Stanojevic S, Graham BL, Cooper BG, Thompson BR, Carter KW, Francis RW, Hall GL; Global Lung Function Initiative TLCO working group. Official ERS technical standards: Global Lung Function Initiative reference values for the carbon monoxide transfer factor for Caucasians. Eur Respir J. 2017 Sep 11;50(3):1700010. doi: 10.1183/13993003.00010-2017. Print 2017 Sep. PMID: 28893868.</li>
+      <li>"Official ERS technical standards: Global Lung Function Initiative reference values for the carbon monoxide transfer factor for Caucasians." Sanja Stanojevic, Brian L. Graham, Brendan G. Cooper, Bruce R. Thompson, Kim W. Carter, Richard W. Francis and Graham L. Hall on behalf of the Global Lung Function Initiative TLCO working group. Eur Respir J 2017; 50: 1700010. Eur Respir J. 2020 Oct 15;56(4):1750010. doi: 10.1183/13993003.50010-2017. Print 2020 Oct. PMID: 33060163.</li>
+      <li>Graham BL, Brusasco V, Burgos F, Cooper BG, Jensen R, Kendrick A, MacIntyre NR, Thompson BR, Wanger J. 2017 ERS/ATS standards for single-breath carbon monoxide uptake in the lung. Eur Respir J. 2017 Jan 3;49(1):1600016. doi: 10.1183/13993003.00016-2016. Print 2017 Jan. PMID: 28049168.</li>
+      <li>Iyer VN, Schroeder DR, Parker KO, Hyatt RE, Scanlon PD. The nonspecific pulmonary function test: longitudinal follow-up and outcomes. Chest. 2011 Apr;139(4):878-886. doi: 10.1378/chest.10-0804. Epub 2010 Aug 19. PMID: 20724741.</li>
+      <li>Clay RD, Iyer VN, Reddy DR, Siontis B, Scanlon PD. The "Complex Restrictive" Pulmonary Function Pattern: Clinical and Radiologic Analysis of a Common but Previously Undescribed Restrictive Pattern. Chest. 2017 Dec;152(6):1258-1265. doi: 10.1016/j.chest.2017.07.009. Epub 2017 Jul 17. PMID: 28728932.</li>
+      <li>Wan ES, Castaldi PJ, Cho MH, Hokanson JE, Regan EA, Make BJ, Beaty TH, Han MK, Curtis JL, Curran-Everett D, Lynch DA, DeMeo DL, Crapo JD, Silverman EK; COPDGene Investigators. Epidemiology, genetics, and subtyping of preserved ratio impaired spirometry (PRISm) in COPDGene. Respir Res. 2014 Aug 6;15(1):89. doi: 10.1186/s12931-014-0089-y. PMID: 25096860; PMCID: PMC4256936.</li>
+      <li>Empey DW. Assessment of upper airways obstruction. Br Med J. 1972 Aug 26;3(5825):503-5. doi: 10.1136/bmj.3.5825.503. PMID: 5069620; PMCID: PMC1785761.</li>
+    </ol>
   </details>
 </section>
 </div>
